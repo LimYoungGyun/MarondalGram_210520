@@ -43,18 +43,13 @@
 			<br>
 			<div class="test p-4">
 				<div class="text-center">
-					계정이 있으신가요? <a href="#" id="signIn">로그인</a>
+					계정이 있으신가요? <a href="/user/sign_in_view">로그인</a>
 				</div>
 			</div>
 		</div>
 	</body>	
 	<script>
 		$(document).ready(function() {
-			// 로그인 페이지로 이동
-			$('#signIn').on('click', function() {
-				location.href="/user/sign_in_view";
-			})
-			
 			// 아이디 중복 확인
 			$('#loginIdCheckBtn').on('click', function(e) {
 				let loginId = $('#loginId').val().trim();

@@ -19,11 +19,12 @@
 	</head>
 	<body>
 		<div class="container">
-			<header class="d-flex justify-content-between align-items-center">
+			<header class="d-flex justify-content-between align-items-center mt-3">
 				<jsp:include page="../include/gnb.jsp"></jsp:include>
 			</header>
 			<hr>
-			<section class="contents d-flex justify-content-center">
+<!-- 			<section class="contents d-flex justify-content-center"> -->
+			<section class="contents">
 				<jsp:include page="../${viewName}.jsp"></jsp:include>
 			</section>
 		</div>
