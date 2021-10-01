@@ -85,11 +85,12 @@ public class UserRestController {
 		User user = userBO.getUserByLoginIDAndPassword(loginId, encryptPassword);
 		
 		Map<String, Object> result = new HashMap<>();
-		HttpSession session = request.getSession();
 		
 		if (user != null) {
 			result.put("result", "success");
-			session.setAttribute("userid", user.getId());
+
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userNickName", user.getNickName());
 			session.setAttribute("userLoginId", user.getLoginId());
