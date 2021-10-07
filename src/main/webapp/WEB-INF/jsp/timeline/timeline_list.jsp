@@ -23,14 +23,14 @@
 		</div>
 	</div>	
 </div>
-<c:forEach items="${postList}" var="post">
+<c:forEach items="${contentViewList}" var="contentView">
 <div class="d-flex justify-content-center">
 	<div class="postContent">
 		<div class="d-flex justify-content-between align-items-center mb-2">
 			<div class="lineHeight">
-				<div class="userNickName">${post.userNickName}</div>
-				<c:if test="${not empty post.location}">
-					<div>${post.location}</div>
+				<div class="userNickName">${contentView.post.userNickName}</div>
+				<c:if test="${not empty contentView.post.location}">
+					<div>${contentView.post.location}</div>
 				</c:if>
 			</div>
 		
@@ -38,7 +38,7 @@
 		</div>
 		
 		<div>
-			<img class="postImage" src="${post.imagePath}">
+			<img class="postImage" src="${contentView.post.imagePath}">
 		</div>
 		
 		<div class="my-3">
