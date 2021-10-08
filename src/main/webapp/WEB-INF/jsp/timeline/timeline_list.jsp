@@ -34,28 +34,52 @@
 				</c:if>
 			</div>
 		
-			<a href="#"><img class="icon mx-3" alt="" src="/static/icon/more.svg"></a>
+			<%-- class무조건 필요 --%>
+			<c:if test="${contentView.post.userId eq userId}">
+				<a href="#" class="more-btn" data-toggle="modal" data-target="#moreModal" data-post-id="${contentView.post.id}">
+					<img class="icon mx-3" alt="" src="/static/icon/more.svg">
+				</a>
+			</c:if>
 		</div>
 		
 		<div>
-			<img class="postImage" src="${contentView.post.imagePath}">
+			<c:if test="${not empty contentView.post.imagePath}">
+				<img class="postImage" src="${contentView.post.imagePath}">
+			</c:if>
+			<c:if test="${empty contentView.post.imagePath}">
+				<img class="postImage" src="/static/image/no_image.png">
+			</c:if>
 		</div>
 		
 		<div class="my-3">
 			<img class="listIcon" alt="" src="/static/icon/heart.svg">
-			<a href="#"><img class="listIcon mx-3" alt="" src="/static/icon/comments.svg"></a>
+			<a href="#" ><img class="listIcon mx-3" alt="" src="/static/icon/comments.svg"></a>
 		</div>
 		
 		<div>좋아요 100000개</div>
 		<div><a href="#" class="allComment text-secondary">댓글 4개 모두 보기</a></div>
+		<hr>
+		
+		<%-- 댓글 보여주는곳 --%>
 		
 		<hr>
 		<div class="d-flex justify-content-between align-items-center">
 			<textarea rows="1" id="comments" class="form-control col-11" placeholder="댓글 쓰기..."></textarea>
-			<div id="commentsRegist" class="commentsRegist opacity4">게시</div>
+			<div id="commentsRegist" class="commentsRegist opacity4"  data-post-id="${contentView.post.id}">게시</div>
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<a href="#" class="del-post">삭제하기</a>
+		</div>
+	</div>
+</div>
+
+
 </c:forEach>
 <script>
 	$(document).ready(function() {
@@ -98,7 +122,7 @@
 			
 			$.ajax({
 				type: 'post'
-				, url : '/timeline/create'
+				, url : '/post/create'
 				, data : formData
 				, enctype : 'multipart/form-data' // 파일 업로드할때 필수태그 - 파일 업로드 필수 설정
 				, processData : false // 파일 업로드할때 필수태그 - 파일 업로드 필수 설정
@@ -116,7 +140,7 @@
 		});
 		
 		$('#comments').on('input', function() {
-			let comments = $('#comments').val().trim();
+			let comments = $('#comments').val();
 			
 			if (comments.length > 0) {
 				$('#commentsRegist').removeClass('opacity4');
@@ -130,13 +154,67 @@
 		});
 		
 		$('#commentsRegist').on('click', function() {
-			let comments = $('#comments').val().trim();
+			let comment = $('#comments').val();
+			let postId = $(this).data('post-id');
+// 			alert(postId);
+			
 			if (comments.length > 0) {
-				alert('게시물 등록');
+// 				alert('게시물 등록');
+				
+				$.ajax({
+					type : 'post'
+					, url : '/comments/create'
+					, data : {'comment' : comment
+						, 'postId' : postId}
+					, success : function(data) {
+						if (data.result == "success") {
+							alert("댓들 등록이 완료되었습니다.");
+							location.reload();
+						}
+					}
+					, error : function(e) {
+						alert('댓들 등록이 실패하였습니다.' + e);
+					}
+				});
+				
 			}
 		});
 		
+		// ... 버튼 클릭 (삭제를 하기 위해)
+		$('.more-btn').on('click', function(e) {
+			e.preventDefault();
+			
+			// postId를 가져온다.
+			// 지금 클릭된 태그의 postId를 가져온다.
+			// $(this)대신 $('.more-btn')를 사용하면 무조건 첫번째 데이터만 가져온다.
+			let postId = $(this).data('post-id');
+			
+			// modal에 postId를 넣어준다.
+			$('#moreModal').data('post-id', postId);
+		});
 		
+		// modal안에 있는 삭제하기 클릭
+		$('#moreModal .del-post').on('click', function(e) {
+			e.preventDefault();
+			
+			let postId = $('#moreModal').data('post-id');
+			
+			// 서버한테 글 삭제 요청(ajax)
+			$.ajax({
+				type : 'post'
+				, url : '/post/delete'
+				, data : {'postId' : postId}
+				, success : function(data) {
+					if (data.result == 'success') {
+						alert('선택한 게시물을 삭제하였습니다.')
+						location.reload();
+					}
+				}
+				, error : function(e) {
+					alert('삭제에 실패하였습니다. ' + e);
+				}
+			});
+		});
 	});
 
 </script>

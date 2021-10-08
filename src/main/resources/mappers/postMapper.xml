@@ -18,6 +18,22 @@
 		ORDER BY
 			`createdAt` DESC
 	</select>
+	
+	<select id="selectPostBypostId" parameterType="int" resultType="com.marondalgram.post.model.Post">
+		SELECT 
+			`id`
+			, `userId`
+			, `userNickName`
+			, `content`
+			, `imagePath`
+			, `location`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{id}
+	</select>
 	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`
 		(
@@ -40,4 +56,12 @@
 			, NOW()
 		)
 	</insert>
+	
+	<delete id="deletePost" parameterType="int">
+		DELETE
+		FROM
+			`post`
+		WHERE
+			`id` = #{id}
+	</delete>
 </mapper>

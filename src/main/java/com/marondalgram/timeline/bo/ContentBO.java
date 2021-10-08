@@ -26,7 +26,19 @@ public class ContentBO {
 		
 		for (Post post : postList) {
 			ContentView contentView = new ContentView();
+			
+			// 게시물
 			contentView.setPost(post);
+			
+			// 댓글들
+			// contentView.setCommentList();
+			
+			// 내가 한 좋아요 여부
+			// 좋아요 -> userId, postId
+			// contentView.setLikeYn();
+			
+			// 좋아요 개수
+			// contentView.setLikeCount();
 			
 			ContentViewList.add(contentView);
 		}

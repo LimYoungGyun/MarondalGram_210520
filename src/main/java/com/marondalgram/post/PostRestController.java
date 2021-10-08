@@ -1,4 +1,4 @@
-package com.marondalgram.timeline;
+package com.marondalgram.post;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,12 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.marondalgram.post.bo.PostBO;
 
 @RestController
-@RequestMapping("/timeline")
-public class TimelineRestController {
-	
+@RequestMapping("/post")
+public class PostRestController {
+
 	@Autowired
 	private PostBO postBO;
 	
+	/**
+	 * 게시물 작성
+	 * @param content
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("content") String content
@@ -48,5 +54,23 @@ public class TimelineRestController {
 		
 		return result;
 	}
-
+	
+	/**
+	 * 게시물 삭제
+	 * @param postId
+	 * @return
+	 */
+	@PostMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("postId") int postId) {
+		
+		int cnt = postBO.deletePost(postId);
+		Map<String, Object> result = new HashMap<>();
+		
+		if (cnt >= 1) {
+			result.put("result", "success");
+		}
+		
+		return result;
+	}
 }
