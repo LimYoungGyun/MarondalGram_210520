@@ -64,6 +64,10 @@ public class PostRestController {
 	public Map<String, Object> delete(
 			@RequestParam("postId") int postId) {
 		
+		
+		// comment -> postId
+		// like -> postId
+		// 그림
 		int cnt = postBO.deletePost(postId);
 		Map<String, Object> result = new HashMap<>();
 		

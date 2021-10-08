@@ -52,7 +52,21 @@
 		</div>
 		
 		<div class="my-3">
-			<img class="listIcon" alt="" src="/static/icon/heart.svg">
+			<%-- 좋아요 상태 --%>
+			<%-- 비워진 상태 --%>
+			<c:if test="${contentView.likeYn eq false }">
+ 				<!-- <img class="listIcon" alt="" src="/static/icon/heart.svg"> -->
+ 				<a href="#" class="like-btn" data-post-id="${contentView.post.id}">
+					<img class="listIcon" alt="" src="https://www.iconninja.com/files/214/518/441/heart-icon.png">
+				</a>
+			</c:if>
+			<%-- 채워진 상태 --%>
+			<c:if test="${contentView.likeYn eq true }">
+ 				<!-- <img class="listIcon" alt="" src="/static/icon/heart.svg"> -->
+ 				<a href="#" class="like-btn" data-post-id="${contentView.post.id}">
+					<img class="listIcon" alt="" src="https://www.iconninja.com/files/527/809/128/heart-icon.png">
+				</a>
+			</c:if>
 			<a href="#" ><img class="listIcon mx-3" alt="" src="/static/icon/comments.svg"></a>
 		</div>
 		
@@ -64,7 +78,7 @@
 		
 		<hr>
 		<div class="d-flex justify-content-between align-items-center">
-			<textarea rows="1" id="comments" class="form-control col-11" placeholder="댓글 쓰기..."></textarea>
+			<textarea rows="1" id="comments${contentView.post.id}" class="form-control col-11 comments" placeholder="댓글 쓰기..."></textarea>
 			<div id="commentsRegist" class="commentsRegist opacity4"  data-post-id="${contentView.post.id}">게시</div>
 		</div>
 	</div>
@@ -139,26 +153,28 @@
 			});
 		});
 		
-		$('#comments').on('input', function() {
-			let comments = $('#comments').val();
+		$('.comments').on('input', function() {
+			let comments = $(this).val();
 			
 			if (comments.length > 0) {
-				$('#commentsRegist').removeClass('opacity4');
-				$('#commentsRegist').addClass('opacity8');
-				$('#commentsRegist').css('cursor', 'pointer');
+				$('.commentsRegist').removeClass('opacity4');
+				$('.commentsRegist').addClass('opacity8');
+				$('.commentsRegist').css('cursor', 'pointer');
 			} else {
-				$('#commentsRegist').removeClass('opacity8');
-				$('#commentsRegist').addClass('opacity4');
+				$('.commentsRegist').removeClass('opacity8');
+				$('.commentsRegist').addClass('opacity4');
 				$('.commentsRegist').css('cursor', 'Default');
 			}
 		});
 		
-		$('#commentsRegist').on('click', function() {
-			let comment = $('#comments').val();
+		$('.commentsRegist').on('click', function() {
 			let postId = $(this).data('post-id');
+			
+			// comments글번호
+			let comment = $('#comments' + postId).val();
 // 			alert(postId);
 			
-			if (comments.length > 0) {
+			if (comment.length > 0) {
 // 				alert('게시물 등록');
 				
 				$.ajax({
@@ -215,6 +231,27 @@
 				}
 			});
 		});
+		
+		// 좋아요 클릭 - 좋아요 / 해제
+		$('.like-btn').on('click', function(e) {
+			e.preventDefault();
+			
+			let postId = $(this).data('post-id');
+// 			alert(postId);
+			
+			$.ajax({
+				type : 'post'
+				, url : '/like/' + postId
+				, success : function(data) {
+					if (data.result = 'sucess') {
+						location.reload(true); // 새로고침
+					}
+				}
+				, error : function(e) {
+					
+				}
+			})
+		})
 	});
 
 </script>

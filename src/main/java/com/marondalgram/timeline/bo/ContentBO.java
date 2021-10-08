@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marondalgram.like.bo.LikeBO;
+import com.marondalgram.like.model.Like;
 import com.marondalgram.post.bo.PostBO;
 import com.marondalgram.post.model.Post;
 import com.marondalgram.timeline.model.ContentView;
@@ -18,7 +20,10 @@ public class ContentBO {
 	@Autowired
 	private PostBO postBO;
 	
-	public List<ContentView> generateContentViewList() {
+	@Autowired
+	private LikeBO likeBO;
+	
+	public List<ContentView> generateContentViewList(int userId) {
 		
 		List<ContentView> ContentViewList = new ArrayList<>();
 		
@@ -35,9 +40,15 @@ public class ContentBO {
 			
 			// 내가 한 좋아요 여부
 			// 좋아요 -> userId, postId
-			// contentView.setLikeYn();
+			Like like = likeBO.getLikeYnByPostIdAndUserId(post.getId(), userId);
+			if (like == null) {
+				contentView.setLikeYn(false);
+			} else {
+				contentView.setLikeYn(true);
+			}
 			
 			// 좋아요 개수
+			// 좋아요 -> postId
 			// contentView.setLikeCount();
 			
 			ContentViewList.add(contentView);

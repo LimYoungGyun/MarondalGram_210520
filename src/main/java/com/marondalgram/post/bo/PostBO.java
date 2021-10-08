@@ -49,12 +49,16 @@ public class PostBO {
 	
 	public int deletePost(int postId) {
 		
+		// 글 select 
 		Post post = getPostBypostId(postId);
 		if (post == null) {
 			logger.error("[delete post] 삭제할 게시물이 없습니다. postId:{}", postId);
 			return 0;
 		}
-		
+		// 글삭제
+		// 댓글삭제
+		// 라이크 삭제
+		// 그림 삭제
 		String imagePath = post.getImagePath();
 		
 		if (imagePath != null) {

@@ -1,5 +1,8 @@
 package com.marondalgram.timeline.model;
 
+import java.util.List;
+
+import com.marondalgram.comments.model.Comments;
 import com.marondalgram.post.model.Post;
 
 public class ContentView {
@@ -10,7 +13,7 @@ public class ContentView {
 	private Post post;
 	
 	// 댓글 N개
-//	private List<Comments> commentList;
+	private List<Comments> commentList;
 	
 	// 내가 한 좋아요
 	private boolean likeYn; // true 좋아요  false: 좋아요 해제
@@ -26,13 +29,13 @@ public class ContentView {
 		this.post = post;
 	}
 
-//	public List<Comments> getCommentList() {
-//		return commentList;
-//	}
-//
-//	public void setCommentList(List<Comments> commentList) {
-//		this.commentList = commentList;
-//	}
+	public List<Comments> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comments> commentList) {
+		this.commentList = commentList;
+	}
 
 	public boolean isLikeYn() {
 		return likeYn;

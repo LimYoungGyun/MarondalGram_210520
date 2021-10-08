@@ -25,10 +25,12 @@ public class TimelineController {
 
 	@RequestMapping("/timeline/timeline_view")
 	public String timelineView(Model model, HttpServletRequest request) {
-		List<ContentView> contentViewList = contentBO.generateContentViewList();
-		
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
+
+		
+		List<ContentView> contentViewList = contentBO.generateContentViewList(userId);
+		
 		
 		model.addAttribute("userId", userId);
 		model.addAttribute("contentViewList", contentViewList);
