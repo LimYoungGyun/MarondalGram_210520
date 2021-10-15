@@ -1,4 +1,4 @@
-package com.marondalgram.timeline;
+package com.marondalgram.comments;
 
 import java.util.List;
 
@@ -9,32 +9,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.marondalgram.post.bo.PostBO;
 import com.marondalgram.timeline.bo.ContentBO;
 import com.marondalgram.timeline.model.ContentView;
 
 @Controller
-public class TimelineController {
-	
-	@Autowired
-	private PostBO postBO;
+@RequestMapping("/comment")
+public class CommentsController {
 	
 	@Autowired
 	private ContentBO contentBO;
 
-	@RequestMapping("/timeline/timeline_view")
-	public String timelineView(Model model, HttpServletRequest request) {
+	@RequestMapping("/comment_list_view")
+	public String commentListView(
+			@RequestParam("postId") int postId
+			,  HttpServletRequest request
+			, Model model) {
+		
 		HttpSession session = request.getSession();
 		int userId = (int) session.getAttribute("userId");
 		
-		List<ContentView> contentViewList = contentBO.generateContentViewList(userId);
+		ContentView contentView = contentBO.generateContentView(userId, postId);
 		
-		// TODO : 세션에 있으므로 없어도 될듯
-		model.addAttribute("userId", userId);
-		model.addAttribute("contentViewList", contentViewList);
-		model.addAttribute("viewName", "timeline/timeline_list");
-		
+		model.addAttribute("postId", postId);
+		model.addAttribute("contentView", contentView);
+		model.addAttribute("viewName", "comment/comment_list_view");
 		return "template/layout";
 	}
 }

@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+.lineHeight {
+	line-height:100%;
+}
+
+.postContent {
+	border:1px solid lightgray;
+	margin-bottom:50px;
+}
+
+.userNickName {
+	margin-top: 20px;
+	margin-left: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.location {
+	margin-top: 3px;
+	margin-left: 10px;
+}
+
+.postImage {
+	margin-top: 20px;
+	height: 510px;
+	width: 800px;
+}
+
+.like-btn:hover {
+	text-decoration: none;
+}
+
+.likeAndComments {
+	margin: 20px 10px 13px 10px;
+}
+
+.likeCount {
+	font-weight: bold;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.commentAllView {
+	margin-top: 4px;
+	margin-left: 10px;
+	margin-bottom: 4px;
+}
+
+.usersComment {
+	margin-left: 10px;
+}
+
+.usersComment > .usersNickName {
+	margin-right: 10px;
+}
+
+.hrLine {
+	margin: 0px;
+	margin-top: 10px;
+	padding: 0px;
+}
+
+/* 댓글쓰기 */
+.comments {
+	border: none;
+	resize: none;
+	height: 55px;
+	padding-top: 15px;
+/* 	overflow: hidden; */
+}
+
+.comments:focus {
+	outline: none;
+}
+
+.allComment:hover {
+	text-decoration: none;
+	color: black;
+}
+
+.commentsRegist {
+	color: blue;
+	font-weight: bold;
+	margin-right: 13px;
+/* 	cursor:pointer; */
+/* 	cursor:Default; */
+}
+
+.opacity4 {
+	opacity: .4;
+}
+
+.opacity8 {
+	opacity: .8;
+}
+
+.modal-dialog {
+	margin-top: 400px;
+}
+
+.modal-dialog .modal-content {
+/* 	height: 200px; */
+/* 	padding-top:55px; */
+	border-radius: 12px;
+}
+
+.modal-dialog .modal-content .del-post {
+	border-radius: 12px;
+}
+
+.modal-dialog .modal-content a {
+	padding: 8px;
+	min-height: 48px;
+	font-size: 23px;
+	color: black;
+	text-align: center;
+	width: 100%;
+	border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+}
+
+.modal-dialog .modal-content a:hover {
+	text-decoration: none;
+	color: black;
+}

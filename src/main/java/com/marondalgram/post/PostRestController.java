@@ -32,6 +32,7 @@ public class PostRestController {
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("content") String content
+			, @RequestParam(value = "location", required = false) String location
 			, @RequestParam(value = "file", required = false) MultipartFile file
 			, HttpServletRequest request) {
 		
@@ -47,7 +48,7 @@ public class PostRestController {
 			return result;
 		}
 		
-		int row = postBO.createpost(userId, userLoginId, userNickName, content, file);
+		int row = postBO.createpost(userId, userLoginId, userNickName, content, location, file);
 		if (row > 0) {
 			result.put("result", "success");
 		}

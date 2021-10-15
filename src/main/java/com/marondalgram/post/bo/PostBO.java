@@ -32,7 +32,7 @@ public class PostBO {
 		return postDAO.selectPostBypostId(postId);
 	}
 	
-	public int createpost(int userId, String userLoginId, String userNickName, String content, MultipartFile file) {
+	public int createpost(int userId, String userLoginId, String userNickName, String content, String location, MultipartFile file) {
 		
 		String imagePath = null;
 		
@@ -44,7 +44,7 @@ public class PostBO {
 			}
 		}
 		
-		return postDAO.insertPost(userId, userNickName, content, imagePath);
+		return postDAO.insertPost(userId, userNickName, content, location, imagePath);
 	}
 	
 	public int deletePost(int postId) {

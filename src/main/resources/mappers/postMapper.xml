@@ -41,7 +41,7 @@
 			, `userNickName`
 			, `content`
 			, `imagePath`
-<!-- 			, `location` -->
+			, `location`
 			, `createdAt`
 			, `updatedAt`
 		)
@@ -51,7 +51,7 @@
 			, #{userNickName}
 			, #{content}
 			, #{imagePath}
-<!-- 			, #{location} -->
+			, #{location}
 			, NOW()
 			, NOW()
 		)

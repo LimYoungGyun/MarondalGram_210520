@@ -24,7 +24,23 @@
 			, NOW()
 		
 		)
-	
 	</insert>
+	
+	<select id="selectCommentsListByPostId" parameterType="int" resultType="com.marondalgram.comments.model.Comments">
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `userNickName`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comments`
+		WHERE
+			`postId` = #{postId}
+		ORDER BY `id` DESC
+<!-- 		LIMIT 3; -->
+	</select>
 
 </mapper>

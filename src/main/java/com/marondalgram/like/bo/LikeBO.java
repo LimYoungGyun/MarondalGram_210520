@@ -23,4 +23,8 @@ public class LikeBO {
 	public int deleteLikeYByPostIdAndUserId(int postId, int userId) {
 		return likeDAO.deleteLikeYByPostIdAndUserId(postId, userId);
 	}
+	
+	public int getLikeCountByPostId(int postId) {
+		return likeDAO.selectLikeCountByPostId(postId);
+	}
 }

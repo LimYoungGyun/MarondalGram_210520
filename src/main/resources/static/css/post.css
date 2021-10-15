@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+#writeTextArea {
+	resize: none;
+}
+.location {
+	margin-left: 0px;
+	margin-top: 30px;
+}
+
+.imageView {
+	margin-top: 30px;
+	height: 400px;
+	border: 1px solid #ced4da;;
+	border-radius: .25rem;
+}
+
+.imageView #imageViewImg {
+	width: 100%;
+	height: 100%;
+}
+
+
+.file-line {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border: 1px solid #ced4da;;
+	border-radius: .25rem;
+}
+
+.file-line #fileName {
+	padding-top: 6px;
+}
+
+#writeBtn {
+	height : 45px;
+}

@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+.contentListView {
+	border: 1px solid rgba(var(--b6a,219,219,219),1);
+	padding: 0px;
+	height: 510px;
+}
+.imageArea {
+	height: 510px;
+	width: 700px;
+}
+.imageArea .postImages {
+	height: 507px;
+	width: 100%;
+}
+
+.contentViewArea {
+	height: 510px;
+	width: 500px;
+}
+
+.contentViewArea .contentViewAreaTop .userNickName {
+	margin-top: 5px;
+}
+
+.contentViewArea .contentViewAreaSection {
+	border-top: 1px solid rgba(var(--b6a,219,219,219),1);
+	margin-top: 10px;
+	margin-left: 10px;
+	height: 350px;
+	overflow: auto;
+	-ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.contentViewArea .contentViewAreaSection::-webkit-scrollbar {
+	display: none; /* Chrome */
+}
+
+.contentViewArea .contentViewAreaSection .userComment {
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.contentViewArea .contentViewAreaSection .usersNickName {
+	margin-right: 10px;
+}
+
+.contentViewArea .contentViewAreaSection .userCommentArea {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.comments {
+	border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
+	height: 46px;
+}
